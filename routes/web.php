@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/hello', function () {
-    return 'Hello World';
 });
 
 Route::get('/world', function () {
@@ -52,3 +49,15 @@ Route::get('/user/{name?}', function ($name=null) {
 Route::get('/user/{name?}', function ($name='aida') {
     return 'Nama saya '.$name;
 });
+
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+use App\Http\Controllers\PhotoController;
+
+Route::resource('photos', PhotoController::class);
+
+Route::get('/greeting', function () {
+	return view('blog.hello', ['name' => 'Aida']);
+});
+
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
